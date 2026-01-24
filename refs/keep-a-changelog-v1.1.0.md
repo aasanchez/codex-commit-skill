@@ -20,7 +20,9 @@ Use only the sections that apply:
 ## Example body
 
 ### Added
+
 - Support draft autosave with status indicator
 
 ### Fixed
+
 - Prevent overlap when resizing widgets
