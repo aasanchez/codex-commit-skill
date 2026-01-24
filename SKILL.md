@@ -21,6 +21,8 @@ Follow this workflow to produce and run a full commit.
 
 - Command: `git rev-parse --abbrev-ref HEAD`
 - Extract JIRA key using the regex and examples in `refs/jira-key-detection.md`.
+- If the command returns `HEAD` (detached), skip branch-based detection and
+  omit the JIRA prefix unless the user supplies a key explicitly.
 
 1) Determine staging state and untracked handling.
 
@@ -58,17 +60,43 @@ Follow this workflow to produce and run a full commit.
 - If a JIRA key is present, prefix it:
   `JIRA-123 type(scope)!: subject`
 - Subject is imperative, concise, and not capitalized as a sentence.
+- Example pattern:
+  `[JIRA-123] type(scope): description`
 
 1) Build the commit body using Keep a Changelog sections.
 
 - Use `refs/keep-a-changelog-v1.1.0.md` for section headers and bullet rules.
 - Include only relevant sections; omit empty sections.
 - Each bullet should be a user-meaningful change, not a file list.
+- Start the body with a one-paragraph narrative description of the commit.
+- Format body with one blank line between sections and between header and list.
+- Wrap body lines to 80 characters (including bullet lines).
+- Use `-` for bullets and keep one bullet per change.
+- If a breaking change exists, include a `BREAKING CHANGE:` footer describing
+  the impact and migration path.
+- Example footer:
+  `BREAKING CHANGE: rename "status" to "state"; update clients accordingly.`
+- Example body:
+
+  ```text
+  Add a narrative summary of what changed and why, in one short paragraph.
+
+  ### Added
+
+  - Support workspace search with saved filters.
+
+  ### Fixed
+
+  - Avoid race when closing tabs on slow connections.
+  ```
 
 1) Run the commit.
 
 - Use `git commit -m "<title>" -m "<body>"` (two -m blocks).
-- If body is empty, use only the title.
+- If the title fully captures a small, single change, and no narrative or
+  changelog adds value, omit the body and use only the title.
+- Example title-only commit:
+  `docs: fix typo in readme`
 
 ## Notes
 
