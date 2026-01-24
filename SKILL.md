@@ -47,11 +47,24 @@ Follow this workflow to produce and run a full commit.
 - Prefer `git diff --cached --stat` plus a quick scan of
   `git diff --cached`.
 - Choose a Conventional Commit type from `refs/conventional-commits-v1.0.0.md`.
+- Type selection cheat sheet:
+  - `fix`: Bug or defect correction.
+  - `perf`: Performance improvement without behavior change.
+  - `refactor`: Code change that neither fixes a bug nor adds a feature.
+  - `feat`: New user-visible behavior or capability.
+  - `docs`: Documentation-only change.
+  - `chore`: Tooling, build, or maintenance tasks.
+- Generated files and formatting-only changes:
+  - Use `chore` for generated artifacts or build output updates.
+  - Use `style` for formatting-only changes that do not affect behavior.
 - Scope is optional; include it when a clear subsystem or package is targeted.
 - Scope discovery guidance (pick one clear match, else omit):
   - Top-level directory or package name from `git diff --cached --stat`.
   - If a monorepo package changes dominate, use that package name.
   - If changes span many areas without a dominant one, omit scope.
+- Scope formatting rules:
+  - Lowercase, ASCII letters, digits, and dashes only.
+  - No spaces or slashes.
 - Mark breaking changes with `!` if applicable.
 
 1) Build the commit title.
