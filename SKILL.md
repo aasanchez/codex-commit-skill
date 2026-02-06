@@ -15,6 +15,15 @@ Commits title with a Keep a Changelog body.
 
 Follow this workflow to produce and run a full commit.
 
+try to keep the title under 72 charecters, but is not a hard limit
+
+ALWAYS keep the body under 80 columns, wrap the text or present in a more
+changelog style, with list, no long text
+
+Break the lines in the right way, do not embed literal "\n" sequences in the
+commit body. The body must contain real newline characters so `git log`/`gitk`
+render it as multiple lines.
+
 ## Workflow
 
 1) Detect current branch and any JIRA key.
@@ -105,7 +114,18 @@ Follow this workflow to produce and run a full commit.
 
 1) Run the commit.
 
-- Use `git commit -m "<title>" -m "<body>"` (two -m blocks).
+- Prefer `git commit -F -` and pipe the body so newlines are preserved.
+  Example:
+
+  ```sh
+  git commit -m "<title>" -F - <<'EOF'
+  <body with real newlines, already wrapped to 80 columns>
+  EOF
+  ```
+
+- If you do use `-m` for the body, ensure the shell passes real newlines
+  (e.g., using a here-doc or `printf`) rather than a single line containing
+  escaped `\n`.
 - If the title fully captures a small, single change, and no narrative or
   changelog adds value, omit the body and use only the title.
 - Example title-only commit:
