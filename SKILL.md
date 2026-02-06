@@ -15,7 +15,7 @@ Commits title with a Keep a Changelog body.
 
 Follow this workflow to produce and run a full commit.
 
-try to keep the title under 72 charecters, but is not a hard limit
+try to keep the title under 80 charecters, is acceptable under 120, never more than 120
 
 ALWAYS keep the body under 80 columns, wrap the text or present in a more
 changelog style, with list, no long text
